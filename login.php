@@ -17,6 +17,49 @@ if (isset($_SESSION['user_id'])) {
 }
 ?>
 
+
+
+<?php  
+// new code
+require_once 'core/init.php';
+if(Input::exists()){
+	$validate = new Validate();
+	$validation = $validate->check($_POST, array(
+		'username' => array(
+			'required' => true,
+			'min' => 2,
+			'max' => 20,
+			'unique' => 'users'
+		),
+		'password' => array(
+			'required' => true,
+			'min' => 6
+		),
+		'password_again' => array(
+			'required' => true,
+			'matches' => 'password'
+		),
+		'email' => array(
+			'required' => true,
+			'min' => 2,
+			'max' => 50
+		)
+	));
+
+	if($validation->passed()){
+		// register user
+		echo "Passed";
+	} else {
+		// output errors
+		print_r($validation->errors());
+	}
+
+}
+
+
+
+?>
+
 <?php include(ROOT_PATH . 'inc/header.php'); ?>	
 	<section id="form"><!--form-->
 		<div class="container">
@@ -51,10 +94,12 @@ if (isset($_SESSION['user_id'])) {
 								echo $_SESSION['signup_error_message'];
 							}
 						?></span>
-						<form action="register-process.php" method="post">
-							<input name="username" type="text" placeholder="Name" required />
-							<input name="email" type="email" placeholder="Email Address" required />
+						<!-- <form action="register-process.php" method="post"> -->
+						<form action="" method="post">
+							<input name="username" type="text" placeholder="Name" value="<?php echo Input::get('username'); ?>" required />
+							<input name="email" type="email" placeholder="Email Address" value="<?php echo Input::get('email'); ?>" required />
 							<input name="password" type="password" placeholder="Password" required />
+							<input name="password_again" type="password" placeholder="Password Again" required />
 							<button name="submit" type="submit" class="btn btn-default">Signup</button>
 						</form>
 					</div><!--/sign up form-->
