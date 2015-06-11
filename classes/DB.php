@@ -1,15 +1,21 @@
 <?php 
 class DB{
+	// singleton pattern which allows only one object to be instantiated
 	private static $_instance = null;
+	// $_pdo PDO(represents a connection between PHP and a database server)
+	// $_query PDOStatement(represents a prepared statement and, after the statement is executed, an associated result set) PDO::prepare(String $statement)
+	// $_error boolean(represents the result of executing a prepared statement) PDOStatement::execute()
+	// $_results Object(represents an anonymous object with property names that correspond to the column names returned in the result set) PDOStatement::fetchAll(PDO::FETCH_OBJ)
+	// $_count integer(returns the number of rows affected by the last DELETE, INSERT, or UPDATE statement executed by the corresponding PDOStatement object.) PDOStatement::rowCount()
 	private $_pdo, 
 	        $_query, 
-	        $_error = false, 
 	        $_results, 
 	        $_count = 0;
 
 	private function __construct(){
 		try {
 			$this->_pdo = new PDO('mysql:host=' . Config::get('mysql/host') . ';dbname=' . Config::get('mysql/db'), Config::get('mysql/username'), Config::get('mysql/password'));
+			$this->_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}catch(PDOException $e){
 			die($e->getMessage());
 		}
@@ -17,119 +23,114 @@ class DB{
 
 	public static function getInstance(){
 		if(!isset(self::$_instance)){
-			self::$_instance = new DB();
+			self::$_instance = new self();
 		}
 		return self::$_instance;	
 	}
 
-	public function query($sql, $params=array()){
-		$this->_error = false;
-		if($this->_query = $this->_pdo->prepare($sql)){
-			if($this->_query = $this->_pdo->prepare($sql)){
-				$x = 1;
-				if(count($params)){
-					foreach($params as $param){
-						$this->_query->bindValue($x, $param);
-						$x++;
-					}
-				}
-			}
 
-			if($this->_query->execute()){
-				$this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ);
-				$this->_count = $this->_query->rowCount();
-			} else {
-				echo $this->_query->errorInfo()[2];
-				$this->_error = true;
+	// return the only object of DB class
+	// method that can support all kinds of query statement
+	// need two parameters, "statement with question marks" and "parameters" that to be used
+	private function query($sql, $params=array()){
+		try{
+			$this->_query = $this->_pdo->prepare($sql);
+		} catch(PDOException $e) {
+			die($e->getMessage());
+		}
+		$x = 1;
+		if(count($params)){
+			foreach($params as $param){
+				$this->_query->bindValue($x, $param);
+				$x++;
 			}
 		}
-
+		try{
+			$this->_query->execute();
+		} catch(PDOException $e){
+			die($e->getMessage());
+		}
 		return $this;
-
 	}
 
-	public function error(){
-		return $this->_error;
-	}
-
-
-	public function action($action, $table, $where=array()){
+	// return the only object of DB class
+	// method which help to build get, delete methods
+	private function action($action, $table, $where=array()){
 		if(count($where) === 3){
 			$operators = array('=', '>', '<', '>=', '<=');
-
 			$field = $where[0];
 			$operator = $where[1];
 			$value = $where[2];
 			if(in_array($operator, $operators)){
 				$sql = "{$action} FROM {$table} WHERE {$field} {$operator} ?";
-				if(!$this->query($sql, array($value))->error()){
-					return $this;
-				}
+				return $this->query($sql, array($value));
 			}
 		}
-		return false;
+		die("DB::action(), wrong number of parameters for \$where");
 	}
 
+	// return the only object of DB class
+	// method to simplify SELECT statement
 	public function get($table, $where){
 		return $this->action("SELECT *", $table, $where);
 	}
 
+	// return the only object of DB class
+	// method to simplify DELECT statement
 	public function delete($table, $where){
 		return $this->action('DELETE', $table, $where); 
 	}
 
+	// return the only object of DB class
+	// method to simplify INSERT statement
 	public function insert($table, $fields = array()){
-		if(count($fields)){
-			$keys = array_keys($fields);
-			$values = null;
-
-			$x = 1;
-			foreach($fields as $field){
-				$values .= '?';
-				if($x<count($fields)){
-					$values .= ', ';
-				}
-				$x++;
+		$keys = array_keys($fields);
+		$values = null;
+		$x = 1;
+		foreach($fields as $field){
+			$values .= '?';
+			if($x<count($fields)){
+				$values .= ', ';
 			}
-			$sql = "INSERT INTO {$talbes} (`" . implode('`,`', $keys) ."`) VALUES ({$values})";
-			echo $sql;
-			if(!$this->query($sql, $fields)->error()){
-				return true;
-			}
-
+			$x++;
 		}
-		return false;
+		$sql = "INSERT INTO {$table} (`" . implode('`,`', $keys) ."`) VALUES ({$values})";
+		return $this->query($sql, $fields);
 	}
 
-
+	// return the only object of DB class
+	// method to simplify UPDATE statement
 	public function update($table, $id, $fields = array()){
 		$set = '';
 		$x = 1;
 		foreach($fields as $name=>$value){
 			$set .= "{$name} = ?";
-
 			if($x <count($fields)){
 				$set .= ', ';
 			}
 			$x++;
 		}
 		$sql = "UPDATE {$table} SET {$set} WHERE id = {$id}";
-		if(!$this->query($sql, $fields)->error()){
-			return true;
-		}
-
-		return false;
+		return $this->query($sql, $fields);
 	}
 
-	public function results(){
+	public function fetchResults(){
+		$this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ);
 		return $this->_results;
 	}
 
-	public function first(){
-		return $this->results()[0];
-	}
-
-	public function count(){
+	public function calRows(){
+		$this->_count = $this->_query->rowCount();
 		return $this->_count;
 	}
+
+	public function pdo(){
+		return $this->_pdo;
+	}
+
+
+	public function first(){
+		return $this->fetchResults()[0];
+	}
+
 }

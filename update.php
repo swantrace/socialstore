@@ -17,7 +17,15 @@ if(Input::exists()){
 				)
 			));
 		if($validation->passed()){
-			//update
+			try{
+				$user->update(array(
+					'email' => Input::get('email')));
+
+				Session::flash('home', 'Your details have been updated');
+				Redirect::to('index.php');
+			} catch (Exception $e){
+				die($e->getMessage());
+			}
 		} else {
 			foreach($validation->errors() as $error){
 				echo $error, '<br>';

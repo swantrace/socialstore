@@ -6,6 +6,7 @@ $page_title = "Home";
 require_once(ROOT_PATH . "inc/function.php"); 
 ?>
 
+<?php require_once 'core/init.php'; ?>
 <?php  
 if(Session::exists('home')){
 	echo '<p>' . Session::flash('home') . '</p>'; 
@@ -15,6 +16,12 @@ $user = new User();
 if($user->isLoggedIn()){
 	echo '<p>Hello ' . '<a href="#">' . escape($user->data()->username) . '</a></p>';
 }
+?>
+<?php  
+if($user->hasPermission('admin')){
+	echo '<p>You are an admin</p>';
+}
+
 ?>
 
 

@@ -1,5 +1,6 @@
 <?php  
 class Redirect{
+	// method used to simplify the process of redirecting to another apge
 	public static function to($location = null) {
 		if($location){
 			if(is_numeric($location)){

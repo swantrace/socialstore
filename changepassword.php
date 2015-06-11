@@ -23,7 +23,17 @@ if(Input::exists()){
 			));
 
 		if($validation->passed()){
-
+			if(Hash::make(Input::get('password'), $user->data()->salt) !== $user->data()->password){
+				echo 'Your current password is wrong';
+			} else {
+				$slat = Hash::salt(32);
+				$user->udpate(array(
+					'password' => Hash::make(Input::get('password_new'), $salt),
+					'salt' => $salt
+					));
+				Session::flash('home', 'Your password has been changed');
+				Redirect::to('index.php');
+			}
 		} else {
 			foreach($validation->errors() as $error){
 				echo $error, '<br>';
