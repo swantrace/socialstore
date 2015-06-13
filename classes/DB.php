@@ -14,7 +14,7 @@ class DB{
 
 	private function __construct(){
 		try {
-			$this->_pdo = new PDO('mysql:host=' . Config::get('mysql/host') . ';dbname=' . Config::get('mysql/db'), Config::get('mysql/username'), Config::get('mysql/password'));
+			$this->_pdo = new PDO('mysql:host=' . Configure::get('mysql/host') . ';dbname=' . Configure::get('mysql/db'), Configure::get('mysql/username'), Configure::get('mysql/password'));
 			$this->_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 		}catch(PDOException $e){
 			die($e->getMessage());

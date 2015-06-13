@@ -1,5 +1,5 @@
 <?php  
-class Config{
+class Configure{
 	// get specific config data from core/init.php
 	public static function get($path = null){
 		if($path){

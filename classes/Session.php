@@ -37,9 +37,17 @@ class Session{
 	// if a session variable with a specific name of $name doesn't exist, return "";
 	public static function flash($name, $string=''){
 		if(self::exists($name)){
-			$flashed_string = self::get($name);
-			self::delete($name);
-			return $flashed_string;
+			if(is_string(self::get($name))){
+				$flashed_string = self::get($name);
+				self::delete($name);
+				return $flashed_string;
+			}  
+			if(is_array(self::get($name))){
+				$flashed_array = self::get($name);
+				self::delete($name);
+				return implode($flashed_array, '<br>');
+			}
+
 		} else {
 			return '';
 		}

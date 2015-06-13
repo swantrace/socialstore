@@ -1,5 +1,4 @@
 <?php
-require_once("config.php");
 
 function get_number_of_products(){
 	global $products;

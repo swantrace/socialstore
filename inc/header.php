@@ -93,12 +93,12 @@ $site_name = "Blue Lotus"
 								<li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
 								<li><a href="<?php echo BASE_URL; ?>checkout.php"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<li><a href="<?php echo BASE_URL; ?>cart.php" class="active"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-								<?php if (!isset($_SESSION['user_id'])): ?>
-									<li><a href="<?php echo BASE_URL; ?>login.php"><i class="fa fa-lock"></i> Login</a></li>
+								<?php if (User::getCurrentUser() == false): ?>
+									<li><a href="<?php echo BASE_URL; ?>login.php"><i class="fa fa-sign-in"></i> Log In</a></li>
+									<li><a href="<?php echo BASE_URL; ?>register.php"><i class="fa pencil-square-o"></i> Sign Up</a></li>
 								<?php else: ?>
-									<li><a href="account.php"><i class="fa fa-user"></i> Account</a></li>
-									<li><a href="message_inbox.php"><i class="fa fa-user"></i> Messages(<?php echo $message_number; ?>)</a></li>
-									<li><a href="additem.php"><i class="fa fa-user"></i> Add Item</a></li>
+									<li><a href="<?php echo BASE_URL; ?>profile.php"><i class="fa fa-user"></i><?php echo User::getCurrentUser()->data()->username; ?></a></li>
+									<li><a href="<?php echo BASE_URL; ?>logout.php"><i class="fa fa-sign-out"></i> Log Out</a></li>
 								<?php endif; ?>		
 							</ul>
 						</div>

@@ -13,8 +13,8 @@ class User{
 
 	public function __construct($id = null, $fields = array()){
 		$this->_db = DB::getInstance();
-		$this->_sessionName = Config::get('session/session_name');
-		$this->_cookieName = Config::get('remember/cookie_name');
+		$this->_sessionName = Configure::get('session/session_name');
+		$this->_cookieName = Configure::get('remember/cookie_name');
 		if(isset($id)){
 			$this->_data = $this->_db->get('users', array('id', '=', $id))->first();
 		} else {
@@ -27,8 +27,8 @@ class User{
 
 	// return current user or false
 	public static function getCurrentUser(){
-		if(Session::exists(Config::get('session/session_name'))){
-			$id = Session::get(Config::get(('session/session_name')));
+		if(Session::exists(Configure::get('session/session_name'))){
+			$id = Session::get(Configure::get(('session/session_name')));
 			if (User::userExistsByID($id)){
 				$user = new self($id);
 				return $user;
@@ -107,7 +107,7 @@ class User{
 					} else {
 						$hash= $hashCheck->first()->hash;
 					}
-					Cookie::put($this->_cookieName, $hash, Config::get('remember/cookie_expiry'));
+					Cookie::put($this->_cookieName, $hash, Configure::get('remember/cookie_expiry'));
 				}
 				$this->_isLoggedIn = true;
 				return true;

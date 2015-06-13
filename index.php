@@ -1,26 +1,16 @@
-<?php require_once("./inc/config.php");?>
-<?php $displayed_products = 6;?>
-<?php include(ROOT_PATH . "inc/products.php"); ?>
 <?php 
+require_once("core/init.php");
+$displayed_products = 6;
 $page_title = "Home";
-require_once(ROOT_PATH . "inc/function.php"); 
-?>
+include(ROOT_PATH . "inc/products.php");
+// if(Session::exists('home')){
+// 	echo '<p>' . Session::flash('home') . '</p>'; 
+// }
 
-<?php require_once 'core/init.php'; ?>
-<?php  
-if(Session::exists('home')){
-	echo '<p>' . Session::flash('home') . '</p>'; 
-}
-
-$user = new User();
-if($user->isLoggedIn()){
-	echo '<p>Hello ' . '<a href="#">' . escape($user->data()->username) . '</a></p>';
-}
-?>
-<?php  
-if($user->hasPermission('admin')){
-	echo '<p>You are an admin</p>';
-}
+// $user = new User();
+// if($user->isLoggedIn()){
+// 	echo '<p>Hello ' . '<a href="#">' . escape($user->data()->username) . '</a></p>';
+// }
 
 ?>
 
