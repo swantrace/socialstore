@@ -16,6 +16,7 @@ class DB{
 		try {
 			$this->_pdo = new PDO('mysql:host=' . Configure::get('mysql/host') . ';dbname=' . Configure::get('mysql/db'), Configure::get('mysql/username'), Configure::get('mysql/password'));
 			$this->_pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+			$this->_pdo->exec("SET NAMES 'utf8'");
 		}catch(PDOException $e){
 			die($e->getMessage());
 		}
@@ -32,7 +33,7 @@ class DB{
 	// return the only object of DB class
 	// method that can support all kinds of query statement
 	// need two parameters, "statement with question marks" and "parameters" that to be used
-	private function query($sql, $params=array()){
+	function query($sql, $params=array()){
 		try{
 			$this->_query = $this->_pdo->prepare($sql);
 		} catch(PDOException $e) {

@@ -1,7 +1,13 @@
 <?php  
 session_start();
+
+// site domain name with
 define("BASE_URL","/Projects/SocialStore/");
 define("ROOT_PATH", $_SERVER["DOCUMENT_ROOT"] . "/Projects/SocialStore/");
+
+// directory spearator
+define("DS", DIRECTORY_SEPARATOR);
+
 $GLOBALS['config'] = array(
 	'mysql' => array(
 			'host' => 'localhost',
