@@ -164,5 +164,15 @@
 	<script src="js/price-range.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/sweetalert-master/dist/sweetalert.min.js"></script>
+    <script src="js/Magnific-Popup-master/dist/jquery.magnific-popup.js"></script>
+<script>
+$('.login').magnificPopup({
+  type: 'ajax'
+});
+</script>
+<script>
+swal("Hi test! Danni")
+</script>
 </body>
 </html>

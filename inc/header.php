@@ -26,6 +26,9 @@ $site_name = "Blue Lotus"
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo BASE_URL; ?>images/ico/apple-touch-icon-114-precomposed.png">
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo BASE_URL; ?>images/ico/apple-touch-icon-72-precomposed.png">
     <link rel="apple-touch-icon-precomposed" href="<?php echo BASE_URL; ?>images/ico/apple-touch-icon-57-precomposed.png">
+	<link rel="stylesheet" type="text/css" href="js/sweetalert-master/dist/sweetalert.css">
+	<link rel="stylesheet" href="js/Magnific-Popup-master/dist/magnific-popup.css"> 
+
 </head><!--/head-->
 
 <body>
@@ -94,7 +97,7 @@ $site_name = "Blue Lotus"
 								<li><a href="<?php echo BASE_URL; ?>checkout.php"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<li><a href="<?php echo BASE_URL; ?>cart.php" class="active"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								<?php if (User::getCurrentUser() == false): ?>
-									<li><a href="<?php echo BASE_URL; ?>login.php"><i class="fa fa-sign-in"></i> Log In</a></li>
+									<li><a class="login" href="<?php echo BASE_URL; ?>login.php"><i class="fa fa-sign-in"></i> Log In</a></li>
 									<li><a href="<?php echo BASE_URL; ?>register.php"><i class="fa pencil-square-o"></i> Sign Up</a></li>
 								<?php else: ?>
 									<li><a href="<?php echo BASE_URL; ?>profile.php"><i class="fa fa-user"></i><?php echo User::getCurrentUser()->data()->username; ?></a></li>
