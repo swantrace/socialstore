@@ -1,12 +1,12 @@
-<?php require_once("../inc/config.php"); ?>
+<?php require_once("../core/init.php"); ?>
 <?php include(ROOT_PATH . "inc/products.php"); ?>
 <?php require_once(ROOT_PATH . 'inc/function.php'); ?>
 <?php
 
 if (isset($_GET["sku"])){
 	$sku = $_GET["sku"];
-	if (isset($products[$sku])){
-		$product = $products[$sku];
+	if (Product::getProductBySKU($sku) !== NULL){
+		$product = Product::getProductBySKU($sku);
 	} else {
 		//header("Location: shop.php");
 		exit();
@@ -166,7 +166,7 @@ if (isset($_GET["sku"])){
 					<div class="product-details"><!--product-details-->
 						<div class="col-sm-5">
 							<div class="view-product">
-								<img src="<?php echo BASE_URL; ?>images/product-details/1.jpg" alt="" />
+								<img src="<?php echo BASE_URL."$product->img"; ?>" alt="" />
 								<h3>ZOOM</h3>
 							</div>
 							<div id="similar-product" class="carousel slide" data-ride="carousel">
@@ -203,24 +203,24 @@ if (isset($_GET["sku"])){
 						</div>
 						<div class="col-sm-7">
 							<div class="product-information"><!--/product-information-->
-								<img src="<?php echo BASE_URL; ?>images/product-details/new.jpg" class="newarrival" alt="" />
-								<h2><?php echo $product["name"] ?></h2>
-								<p>Web ID: <?php echo $product["sku"] ?></p>
+					            <img src="<?php echo BASE_URL; ?>images/product-details/new.jpg" class="newarrival" alt="" />
+								<h2><?php echo $product->name ?></h2>
+								<p>Web ID: <?php echo $product->sku ?></p>
 								<img src="<?php echo BASE_URL; ?>images/product-details/rating.png" alt="" style="display:block;" />
 								<span>
-									<span>US <?php echo $product["price"] ?></span>
+									<span>US <?php echo $product->price ?></span>
 									<label>Quantity:</label>
 									<input type="text" value="3" />
 									<form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">
 										<input type="hidden" name="cmd" value="_s-xclick">
-										<input type="hidden" name="hosted_button_id" value="<?php echo $product["paypal_id"]; ?>">
-										<input type="hidden" name="item_name" value="<?php echo $product["name"]; ?>">
+										<input type="hidden" name="hosted_button_id" value="<?php echo $product->paypal; ?>">
+										<input type="hidden" name="item_name" value="<?php echo $product->name; ?>">
 										<input style="width: 70%;" type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_cart_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
 										<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 									</form>
 								</span>
-								<p><b>Details:</b><?php echo $product["description"] ?></p>
-								<p><b>Category:</b><?php echo $product["category"] ?></p>
+								<p><b>Details:</b><?php echo $product->description ?></p>
+								<p><b>Category:</b><?php echo $product->category ?></p>
 								<a href=""><img src="<?php echo BASE_URL; ?>images/product-details/share.png" class="share img-responsive"  alt="" /></a>
 							</div><!--/product-information-->
 						</div>

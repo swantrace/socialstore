@@ -1,5 +1,5 @@
 <?php
-require_once("core/init.php");
+require_once("../core/init.php");
 $products = Product::getAllProducts(); 
 
 function get_number_of_products(){
@@ -14,7 +14,7 @@ function get_list_view_html($product){
 	$output .= '<div class="product-image-wrapper">';
 	$output .= '<div class="single-products">';
 	$output .= '<div class="productinfo text-center">';
-	$output .= '<img src="' . $product->img . '" alt="" />';
+	$output .= '<img src="' . BASE_URL . $product->img . '" alt="" />';
 	$output .= '<h2>$'. $product->price .'</h2>';
 	$output .= '<a href="#"><p>' . $product->name . '</p></a>';
 	$output .= '<form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">';

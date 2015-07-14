@@ -2,8 +2,8 @@
 session_start();
 
 // site domain name with
-define("BASE_URL","/Projects/SocialStore/");
-define("ROOT_PATH", $_SERVER["DOCUMENT_ROOT"] . "/Projects/SocialStore/");
+if (!defined('BASE_URL')) define("BASE_URL","/Projects/SocialStore/");
+if (!defined('ROOT_PATH')) define("ROOT_PATH", $_SERVER["DOCUMENT_ROOT"] . "/Projects/SocialStore/");
 
 // directory spearator
 define("DS", DIRECTORY_SEPARATOR);
@@ -26,11 +26,11 @@ $GLOBALS['config'] = array(
 	);
 
 spl_autoload_register(function($class){
-	require_once 'classes/' . $class . '.php';
+	require_once ROOT_PATH.'classes/' . $class . '.php';
 });
 
-require_once 'functions/sanitize.php';
-require_once 'functions/categorize.php';
+require_once ROOT_PATH.'functions/sanitize.php';
+require_once ROOT_PATH.'functions/categorize.php';
 
 if(Cookie::exists(Configure::get('remember/cookie_name')) && !Session::exists(Configure::get('session/session_name'))){
 	$hash = Cookie::get(Configure::get('remember/cookie_name'));

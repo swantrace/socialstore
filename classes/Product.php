@@ -37,11 +37,30 @@ class Product{
 		return false;
 	}	
 
+   // return boolean, if a product with an id of $id exists in the database return true, otherwise return false
+	public static function productExistsBySKU($sku){
+		if(isset($sku)){
+			$data = DB::getInstance()->get('products', array('sku', '=', $sku));
+			if($data->calRows ()){
+				return true;
+			}
+		}
+		return false;
+	}	
+
 
 	// return a product with id of $id or false
 	public static function getProductByID($id){
 		if (Product::productExistsByID($id)){
 			$product = new self($id);
+			return $product;
+		}
+		return false;
+	}
+
+	public static function getProductBySKU($sku){
+		if (Product::productExistsBySKU($sku)){
+			$product = DB::getInstance()->get('products', array('sku', '=', $sku))->first();
 			return $product;
 		}
 		return false;
