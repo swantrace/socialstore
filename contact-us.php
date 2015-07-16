@@ -1,4 +1,4 @@
-<?php require_once("./inc/config.php") ?>
+<?php require_once('core/init.php'); ?>
 <?php 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {

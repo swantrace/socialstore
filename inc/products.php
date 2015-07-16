@@ -1,7 +1,4 @@
 <?php
-require_once("../core/init.php");
-$products = Product::getAllProducts(); 
-
 function get_number_of_products(){
 	global $products;
 	return count($products);
@@ -49,5 +46,10 @@ function get_list_view_html($product){
 	$output .='</div>';
 	return $output;
 } 
+
+
+function get_products_recent(){
+
+}
 
 ?>

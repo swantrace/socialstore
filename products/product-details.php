@@ -5,14 +5,14 @@
 
 if (isset($_GET["sku"])){
 	$sku = $_GET["sku"];
-	if (Product::getProductBySKU($sku) !== NULL){
-		$product = Product::getProductBySKU($sku);
+	if (Product::getProductBySKU($sku) !== false){
+		$product = Product::getProductBySKU($sku)->data();
 	} else {
-		//header("Location: shop.php");
+		header("Location: " . BASE_URL. "products");
 		exit();
 	}
 } else {
-	header("Location: shop.php");
+	header("Location: " . BASE_URL . "products");
 	exit();
 }
 ?>
@@ -156,7 +156,7 @@ if (isset($_GET["sku"])){
 						</div><!--/price-range-->
 						
 						<div class="shipping text-center"><!--shipping-->
-							<img src="<?php echo BASE_URL; ?>images/home/shipping.jpg" alt="" />
+							<img src="<?php echo BASE_URL; ?>img/home/shipping.jpg" alt="" />
 						</div><!--/shipping-->
 						
 					</div>
@@ -174,19 +174,19 @@ if (isset($_GET["sku"])){
 								  <!-- Wrapper for slides -->
 								    <div class="carousel-inner">
 										<div class="item active">
-										  <a href=""><img src="<?php echo BASE_URL; ?>images/product-details/similar1.jpg" alt=""></a>
-										  <a href=""><img src="<?php echo BASE_URL; ?>images/product-details/similar2.jpg" alt=""></a>
-										  <a href=""><img src="<?php echo BASE_URL; ?>images/product-details/similar3.jpg" alt=""></a>
+										  <a href=""><img src="<?php echo BASE_URL; ?>img/product-details/similar1.jpg" alt=""></a>
+										  <a href=""><img src="<?php echo BASE_URL; ?>img/product-details/similar2.jpg" alt=""></a>
+										  <a href=""><img src="<?php echo BASE_URL; ?>img/product-details/similar3.jpg" alt=""></a>
 										</div>
 										<div class="item">
-										  <a href=""><img src="<?php echo BASE_URL; ?>images/product-details/similar1.jpg" alt=""></a>
-										  <a href=""><img src="<?php echo BASE_URL; ?>images/product-details/similar2.jpg" alt=""></a>
-										  <a href=""><img src="<?php echo BASE_URL; ?>images/product-details/similar3.jpg" alt=""></a>
+										  <a href=""><img src="<?php echo BASE_URL; ?>img/product-details/similar1.jpg" alt=""></a>
+										  <a href=""><img src="<?php echo BASE_URL; ?>img/product-details/similar2.jpg" alt=""></a>
+										  <a href=""><img src="<?php echo BASE_URL; ?>img/product-details/similar3.jpg" alt=""></a>
 										</div>
 										<div class="item">
-										  <a href=""><img src="<?php echo BASE_URL; ?>images/product-details/similar1.jpg" alt=""></a>
-										  <a href=""><img src="<?php echo BASE_URL; ?>images/product-details/similar2.jpg" alt=""></a>
-										  <a href=""><img src="<?php echo BASE_URL; ?>images/product-details/similar3.jpg" alt=""></a>
+										  <a href=""><img src="<?php echo BASE_URL; ?>img/product-details/similar1.jpg" alt=""></a>
+										  <a href=""><img src="<?php echo BASE_URL; ?>img/product-details/similar2.jpg" alt=""></a>
+										  <a href=""><img src="<?php echo BASE_URL; ?>img/product-details/similar3.jpg" alt=""></a>
 										</div>
 										
 									</div>
@@ -203,10 +203,10 @@ if (isset($_GET["sku"])){
 						</div>
 						<div class="col-sm-7">
 							<div class="product-information"><!--/product-information-->
-					            <img src="<?php echo BASE_URL; ?>images/product-details/new.jpg" class="newarrival" alt="" />
+					            <img src="<?php echo BASE_URL; ?>img/product-details/new.jpg" class="newarrival" alt="" />
 								<h2><?php echo $product->name ?></h2>
 								<p>Web ID: <?php echo $product->sku ?></p>
-								<img src="<?php echo BASE_URL; ?>images/product-details/rating.png" alt="" style="display:block;" />
+								<img src="<?php echo BASE_URL; ?>img/product-details/rating.png" alt="" style="display:block;" />
 								<span>
 									<span>US <?php echo $product->price ?></span>
 									<label>Quantity:</label>
@@ -219,9 +219,24 @@ if (isset($_GET["sku"])){
 										<img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
 									</form>
 								</span>
-								<p><b>Details:</b><?php echo $product->description ?></p>
-								<p><b>Category:</b><?php echo $product->category ?></p>
-								<a href=""><img src="<?php echo BASE_URL; ?>images/product-details/share.png" class="share img-responsive"  alt="" /></a>
+								<table>
+							  		<tr>
+										<th>
+											<input type="hidden" name="on0" value="Size">
+											<label for="os0">Size</label>
+										</th>
+										<td>
+											<select name="os0" id="os0">
+												<?php foreach($product->sizes as $size) { ?>
+													<option value="<?php echo $size; ?>"><?php echo $size; ?> </option>
+												<?php } ?>
+											</select>
+										</td>
+									</tr>
+								</table>
+								<p><b>Details:</b><?php echo $product->description; ?></p>
+								<p><b>Category:</b><?php echo implode($product->categories, ","); ?></p>
+								<a href=""><img src="<?php echo BASE_URL; ?>img/product-details/share.png" class="share img-responsive"  alt="" /></a>
 							</div><!--/product-information-->
 						</div>
 					</div><!--/product-details-->
@@ -241,7 +256,7 @@ if (isset($_GET["sku"])){
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="<?php echo BASE_URL; ?>images/home/gallery1.jpg" alt="" />
+												<img src="<?php echo BASE_URL; ?>img/home/gallery1.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -253,7 +268,7 @@ if (isset($_GET["sku"])){
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="<?php echo BASE_URL; ?>images/home/gallery2.jpg" alt="" />
+												<img src="<?php echo BASE_URL; ?>img/home/gallery2.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -265,7 +280,7 @@ if (isset($_GET["sku"])){
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="<?php echo BASE_URL; ?>images/home/gallery3.jpg" alt="" />
+												<img src="<?php echo BASE_URL; ?>img/home/gallery3.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -277,7 +292,7 @@ if (isset($_GET["sku"])){
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="<?php echo BASE_URL; ?>images/home/gallery4.jpg" alt="" />
+												<img src="<?php echo BASE_URL; ?>img/home/gallery4.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -292,7 +307,7 @@ if (isset($_GET["sku"])){
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="<?php echo BASE_URL; ?>images/home/gallery1.jpg" alt="" />
+												<img src="<?php echo BASE_URL; ?>img/home/gallery1.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -304,7 +319,7 @@ if (isset($_GET["sku"])){
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="<?php echo BASE_URL; ?>images/home/gallery3.jpg" alt="" />
+												<img src="<?php echo BASE_URL; ?>img/home/gallery3.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -316,7 +331,7 @@ if (isset($_GET["sku"])){
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="<?php BASE_URL; ?>images/home/gallery2.jpg" alt="" />
+												<img src="<?php BASE_URL; ?>img/home/gallery2.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -328,7 +343,7 @@ if (isset($_GET["sku"])){
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="<?php BASE_URL; ?>images/home/gallery4.jpg" alt="" />
+												<img src="<?php BASE_URL; ?>img/home/gallery4.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -343,7 +358,7 @@ if (isset($_GET["sku"])){
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="<?php BASE_URL; ?>images/home/gallery1.jpg" alt="" />
+												<img src="<?php BASE_URL; ?>img/home/gallery1.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -355,7 +370,7 @@ if (isset($_GET["sku"])){
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="<?php BASE_URL; ?>images/home/gallery2.jpg" alt="" />
+												<img src="<?php BASE_URL; ?>img/home/gallery2.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -367,7 +382,7 @@ if (isset($_GET["sku"])){
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="<?php BASE_URL; ?>images/home/gallery3.jpg" alt="" />
+												<img src="<?php BASE_URL; ?>img/home/gallery3.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -379,7 +394,7 @@ if (isset($_GET["sku"])){
 									<div class="product-image-wrapper">
 										<div class="single-products">
 											<div class="productinfo text-center">
-												<img src="<?php BASE_URL; ?>images/home/gallery4.jpg" alt="" />
+												<img src="<?php BASE_URL; ?>img/home/gallery4.jpg" alt="" />
 												<h2>$56</h2>
 												<p>Easy Polo Black Edition</p>
 												<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -405,7 +420,7 @@ if (isset($_GET["sku"])){
 											<input type="email" placeholder="Email Address"/>
 										</span>
 										<textarea name="" ></textarea>
-										<b>Rating: </b> <img src="<?php echo BASE_URL; ?>images/product-details/rating.png" alt="" />
+										<b>Rating: </b> <img src="<?php echo BASE_URL; ?>img/product-details/rating.png" alt="" />
 										<button type="button" class="btn btn-default pull-right">
 											Submit
 										</button>
@@ -426,7 +441,7 @@ if (isset($_GET["sku"])){
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="<?php echo BASE_URL; ?>images/home/recommend1.jpg" alt="" />
+													<img src="<?php echo BASE_URL; ?>img/home/recommend1.jpg" alt="" />
 													<h2>$56</h2>
 													<p>Easy Polo Black Edition</p>
 													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -438,7 +453,7 @@ if (isset($_GET["sku"])){
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="<?php echo BASE_URL; ?>images/home/recommend2.jpg" alt="" />
+													<img src="<?php echo BASE_URL; ?>img/home/recommend2.jpg" alt="" />
 													<h2>$56</h2>
 													<p>Easy Polo Black Edition</p>
 													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -450,7 +465,7 @@ if (isset($_GET["sku"])){
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="<?php echo BASE_URL; ?>images/home/recommend3.jpg" alt="" />
+													<img src="<?php echo BASE_URL; ?>img/home/recommend3.jpg" alt="" />
 													<h2>$56</h2>
 													<p>Easy Polo Black Edition</p>
 													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -464,7 +479,7 @@ if (isset($_GET["sku"])){
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="<?php echo BASE_URL; ?>images/home/recommend1.jpg" alt="" />
+													<img src="<?php echo BASE_URL; ?>img/home/recommend1.jpg" alt="" />
 													<h2>$56</h2>
 													<p>Easy Polo Black Edition</p>
 													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -476,7 +491,7 @@ if (isset($_GET["sku"])){
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="<?php echo BASE_URL; ?>images/home/recommend2.jpg" alt="" />
+													<img src="<?php echo BASE_URL; ?>img/home/recommend2.jpg" alt="" />
 													<h2>$56</h2>
 													<p>Easy Polo Black Edition</p>
 													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
@@ -488,7 +503,7 @@ if (isset($_GET["sku"])){
 										<div class="product-image-wrapper">
 											<div class="single-products">
 												<div class="productinfo text-center">
-													<img src="<?php echo BASE_URL; ?>images/home/recommend3.jpg" alt="" />
+													<img src="<?php echo BASE_URL; ?>img/home/recommend3.jpg" alt="" />
 													<h2>$56</h2>
 													<p>Easy Polo Black Edition</p>
 													<button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>

@@ -33,7 +33,7 @@ class DB{
 	// return the only object of DB class
 	// method that can support all kinds of query statement
 	// need two parameters, "statement with question marks" and "parameters" that to be used
-	function query($sql, $params=array()){
+	function query($sql, $params=array(), $type=PDO::PARAM_STR){
 		try{
 			$this->_query = $this->_pdo->prepare($sql);
 		} catch(PDOException $e) {
@@ -42,7 +42,7 @@ class DB{
 		$x = 1;
 		if(count($params)){
 			foreach($params as $param){
-				$this->_query->bindValue($x, $param);
+				$this->_query->bindValue($x, $param, $type);
 				$x++;
 			}
 		}
@@ -128,6 +128,11 @@ class DB{
 	public function pdo(){
 		return $this->_pdo;
 	}
+
+	public function getQuery(){
+		return $this->_query;
+	}
+
 
 
 	public function first(){

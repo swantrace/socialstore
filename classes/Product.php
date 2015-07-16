@@ -17,13 +17,32 @@ class Product{
 			$id = $this->_db->pdo()->lastInsertId();
 			$this->_data = $this->_db->get('products', array('id', '=', $id))->first();
 		}
+		$this->_data->sizes = Product::getProductSizesById($id);
+		$this->_data->categories = Product::getProductCategoriesById($id);
 	}
 
-	// return all the products 
+    public static function getProductSizesById($id){
+    	$sizes = array();
+    	$sql = "SELECT size FROM sizes INNER JOIN products_sizes ON sizes.id = products_sizes.size_id WHERE products_sizes.product_id = ? ORDER BY sizes.order";
+    	$temp_sizes = DB::getInstance()->query($sql, array($id))->fetchResults();
+    	foreach($temp_sizes as $temp_size){
+    		$sizes[] = $temp_size->size;
+    	}
+    	return $sizes;
+    }
+
+    public static function getProductCategoriesById($id){
+    	$categories = array("category A", "category B", "category C");
+    	return $categories;
+    }
+
+
+
+	// return info of all the products 
 	public static function getAllProducts(){
-		$sql = "SELECT name, price, img, sku, paypal FROM products ORDER BY sku";
-		$products = DB::getInstance()->query($sql)->fetchResults();
-		return $products;
+		$sql = "SELECT * FROM products ORDER BY id";
+		$all_products_data = DB::getInstance()->query($sql, array())->fetchResults();
+		return $all_products_data;
 	}
 
    // return boolean, if a product with an id of $id exists in the database return true, otherwise return false
@@ -60,7 +79,8 @@ class Product{
 
 	public static function getProductBySKU($sku){
 		if (Product::productExistsBySKU($sku)){
-			$product = DB::getInstance()->get('products', array('sku', '=', $sku))->first();
+			$id = DB::getInstance()->get('products', array('sku', '=', $sku))->first()->id;
+			$product = new self($id);
 			return $product;
 		}
 		return false;
@@ -90,6 +110,30 @@ class Product{
 		if(!$this->_db->update('products', $id, $fields)){
 			throw new Exception('There was a problem udpating');
 		}
+	}
+
+	public static function getRecentProducts($num = 6){
+		$sql = "SELECT * FROM products ORDER BY id DESC LIMIT ?";
+        $array = array($num);
+		$recent_products_data = DB::getInstance()->query($sql,[$num],PDO::PARAM_INT)->fetchResults();
+		$recent_products_data = array_reverse($recent_products_data);
+		return $recent_products_data;
+	}
+
+	public static function getProductsNumber(){
+		$sql = "SELECT COUNT(id) FROM products";
+		$number = DB::getInstance()->query($sql)->getQuery()->fetchColumn(0);
+    	return intval($number);
+	}
+
+	public static function getSubsetProducts($positionStart, $positionEnd){
+		// echo $positionStart . "<br>" . $positionEnd;
+		// die();
+    	$offset = $positionStart - 1;
+    	$rows = $positionEnd - $positionStart + 1;
+    	$sql = "SELECT * FROM products ORDER BY id LIMIT ?, ?";
+		$subset_products_data = DB::getInstance()->query($sql, [$offset, $rows], PDO::PARAM_INT)->fetchResults();
+		return $subset_products_data;
 	}
 
 }

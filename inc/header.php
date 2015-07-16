@@ -21,11 +21,11 @@ $site_name = "Blue Lotus"
     <script src="js/html5shiv.js"></script>
     <script src="js/respond.min.js"></script>
     <![endif]-->       
-    <link rel="shortcut icon" href="<?php echo BASE_URL ?>images/ico/favicon.ico">
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo BASE_URL; ?>images/ico/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo BASE_URL; ?>images/ico/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo BASE_URL; ?>images/ico/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="<?php echo BASE_URL; ?>images/ico/apple-touch-icon-57-precomposed.png">
+    <link rel="shortcut icon" href="<?php echo BASE_URL ?>img/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo BASE_URL; ?>img/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo BASE_URL; ?>img/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo BASE_URL; ?>img/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="<?php echo BASE_URL; ?>img/ico/apple-touch-icon-57-precomposed.png">
 	<link rel="stylesheet" type="text/css" href="js/sweetalert-master/dist/sweetalert.css">
 	<link rel="stylesheet" href="js/Magnific-Popup-master/dist/magnific-popup.css"> 
 
@@ -64,7 +64,7 @@ $site_name = "Blue Lotus"
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="<?php echo BASE_URL; ?>index.php"><img src="<?php echo BASE_URL; ?>images/home/logo.png" alt="" /></a>
+							<a href="<?php echo BASE_URL; ?>index.php"><img src="<?php echo BASE_URL; ?>img/home/logo.png" alt="" /></a>
 						</div>
 						<div class="btn-group pull-right">
 							<div class="btn-group">
@@ -97,8 +97,7 @@ $site_name = "Blue Lotus"
 								<li><a href="<?php echo BASE_URL; ?>checkout.php"><i class="fa fa-crosshairs"></i> Checkout</a></li>
 								<li><a href="<?php echo BASE_URL; ?>cart.php" class="active"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								<?php if (User::getCurrentUser() == false): ?>
-									<li><a class="login" href="<?php echo BASE_URL; ?>login.php"><i class="fa fa-sign-in"></i> Log In</a></li>
-									<li><a href="<?php echo BASE_URL; ?>register.php"><i class="fa pencil-square-o"></i> Sign Up</a></li>
+									<li><a class="login" href="<?php echo BASE_URL; ?>login.php"><i class="fa fa-sign-in"></i> Log In/Sign Up</a></li>
 								<?php else: ?>
 									<li><a href="<?php echo BASE_URL; ?>profile.php"><i class="fa fa-user"></i><?php echo User::getCurrentUser()->data()->username; ?></a></li>
 									<li><a href="<?php echo BASE_URL; ?>logout.php"><i class="fa fa-sign-out"></i> Log Out</a></li>

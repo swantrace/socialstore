@@ -13,3 +13,7 @@
 	display: inline-block;
 	width: 35%;
 }
+
+.clear {
+  clear: both;
+}
