@@ -1,8 +1,4 @@
 <?php 
-
-require_once('inc/config.php');
-require_once(ROOT_PATH . 'inc/database.php');
-
 if(isset($_GET['email']) && preg_match("/^([a-zA-Z0-9])+([a-zA-Z0-9\._-])*@([a-zA-Z0-9_-])+([a-zA-Z0-9\._-]+)+$/", $_GET['email'])){
 	$email = mysql_real_escape_string($_GET['email']);
 }

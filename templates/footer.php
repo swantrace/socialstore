@@ -171,8 +171,8 @@ $('.login').magnificPopup({
   type: 'ajax'
 });
 </script>
-<script>
+<!--<script>
 swal("Hi test! Danni")
-</script>
+</script>-->
 </body>
 </html>

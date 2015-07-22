@@ -1,4 +1,3 @@
-<?php require_once('core/init.php'); ?>
 <?php 
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -68,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 ?>
 <?php $page_title = "Contact"; ?>
-<?php include(ROOT_PATH . 'inc/header.php') ?>
+<?php include('header.php') ?>
 	 
 	 <div id="contact-page" class="container">
     	<div class="bg">
@@ -163,4 +162,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     	</div>	
     </div><!--/#contact-page-->
 	
-<?php include(ROOT_PATH . 'inc/footer.php') ?>
+<?php include('footer.php') ?>

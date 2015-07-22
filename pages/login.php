@@ -1,8 +1,7 @@
 <?php 
-require_once("core/init.php");
 $page_title = "Login & Register"; 
 ?>
-<?php include(ROOT_PATH . 'inc/header.php'); ?>	
+<?php include(ROOT_PATH . 'header.php'); ?>	
 	<section id="form"><!--form-->
 		<div class="container">
 			<div class="row">
@@ -64,4 +63,4 @@ $page_title = "Login & Register";
 	</section><!--/form-->
 	
 	
-<?php include('inc/footer.php') ?>s
+<?php include('footer.php') ?>

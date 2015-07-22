@@ -1,47 +1,6 @@
-<?php require_once("../core/init.php") ?>
-<?php $products = Product::getAllProducts(); ?>
-<?php require_once(ROOT_PATH . 'inc/products.php'); ?>
-<?php
-	if (empty($_GET["pg"])) {
-		$current_page = 1;
-	} else {
-		$current_page = $_GET["pg"];
-	}
-
-	$current_page = intval($current_page);
-
-	$total_products = Product::getProductsNumber();
-	$products_per_page = 12;
-	$total_pages = ceil($total_products / $products_per_page);
-
-	if ($current_page > $total_pages) {
-		header("Location: ./?pg=" . $total_pages);
-	}
-
-	// redirect too-small page numbers (or strings converted to 0) to the first page
-	if ($current_page < 1) {
-		header("Location: ./");
-	}
-
-	// determine the start and end shirt for the current page; for example, on
-	// page 3 with 8 shirts per page, $start and $end would be 17 and 24
-	$start = (($current_page - 1) * $products_per_page) + 1;
-	$end = $current_page * $products_per_page;
-	if ($end > $total_products) {
-		$end = $total_products;
-	}
-
-	$products = Product::getSubsetProducts($start,$end);
-
-?>
-<?php $page_title = "Shop";?>
-<?php include(ROOT_PATH . 'inc/header.php') ?>
+<?php $page_title = "Blogs"; ?>
+<?php include('templates/header.php') ?>
 	
-	<section id="advertisement">
-		<div class="container">
-			<img src="<?php echo BASE_URL; ?>img/shop/advertisement.jpg" alt="" />
-		</div>
-	</section>
 	<section>
 		<div class="container">
 			<div class="row">
@@ -153,7 +112,7 @@
 									<h4 class="panel-title"><a href="#">Shoes</a></h4>
 								</div>
 							</div>
-						</div><!--/category-productsr-->
+						</div><!--/category-products-->
 					
 						<div class="brands_products"><!--brands_products-->
 							<h2>Brands</h2>
@@ -179,36 +138,91 @@
 						</div><!--/price-range-->
 						
 						<div class="shipping text-center"><!--shipping-->
-							<img src= "<?php echo BASE_URL . "img/home/shipping.jpg" ?>" alt="" />
+							<img src="img/home/shipping.jpg" alt="" />
 						</div><!--/shipping-->
-						
 					</div>
 				</div>
-				
-				<div class="col-sm-9 padding-right">
-					<div class="features_items"><!--features_items-->
-						<h2 class="title text-center">Features Items</h2>
-						<?php 
-							foreach($products as $product) {
-						    	echo get_list_view_html($product);
-						    } 
-						?>
-						<div class="clear"></div>
-						<ul class="pagination">
-							<?php $i = 0; ?>
-							<?php while ($i < $total_pages) : ?>
-								<?php $i += 1; ?>
-								<?php if ($i == $current_page) : ?>
-									<li class="active"><span><?php echo $i; ?></span></li>
-								<?php else : ?>
-									<li><a href="./?pg=<?php echo $i; ?>"><?php echo $i; ?></a></li>
-								<?php endif; ?>
-							<?php endwhile; ?>
-						</ul>
-					</div><!--features_items-->
+				<div class="col-sm-9">
+					<div class="blog-post-area">
+						<h2 class="title text-center">Latest From our Blog</h2>
+						<div class="single-blog-post">
+							<h3>Girls Pink T Shirt arrived in store</h3>
+							<div class="post-meta">
+								<ul>
+									<li><i class="fa fa-user"></i> Mac Doe</li>
+									<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
+									<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
+								</ul>
+								<span>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star"></i>
+										<i class="fa fa-star-half-o"></i>
+								</span>
+							</div>
+							<a href="">
+								<img src="img/blog/blog-one.jpg" alt="">
+							</a>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+							<a  class="btn btn-primary" href="">Read More</a>
+						</div>
+						<div class="single-blog-post">
+							<h3>Girls Pink T Shirt arrived in store</h3>
+							<div class="post-meta">
+								<ul>
+									<li><i class="fa fa-user"></i> Mac Doe</li>
+									<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
+									<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
+								</ul>
+								<span>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-half-o"></i>
+								</span>
+							</div>
+							<a href="">
+								<img src="img/blog/blog-two.jpg" alt="">
+							</a>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+							<a  class="btn btn-primary" href="">Read More</a>
+						</div>
+						<div class="single-blog-post">
+							<h3>Girls Pink T Shirt arrived in store</h3>
+							<div class="post-meta">
+								<ul>
+									<li><i class="fa fa-user"></i> Mac Doe</li>
+									<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
+									<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
+								</ul>
+								<span>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star"></i>
+									<i class="fa fa-star-half-o"></i>
+								</span>
+							</div>
+							<a href="">
+								<img src="img/blog/blog-three.jpg" alt="">
+							</a>
+							<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+							<a  class="btn btn-primary" href="">Read More</a>
+						</div>
+						<div class="pagination-area">
+							<ul class="pagination">
+								<li><a href="" class="active">1</a></li>
+								<li><a href="">2</a></li>
+								<li><a href="">3</a></li>
+								<li><a href=""><i class="fa fa-angle-double-right"></i></a></li>
+							</ul>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
 	</section>
 	
-<?php include(ROOT_PATH . 'inc/footer.php') ?>
+<?php include('inc/footer.php') ?>

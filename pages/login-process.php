@@ -1,5 +1,4 @@
 <?php  
-require_once 'core/init.php';
 $errors = array();
 if(Token::check(Input::get('token'))){
 	$validate = new Validate();

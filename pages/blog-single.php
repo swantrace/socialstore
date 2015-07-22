@@ -1,5 +1,6 @@
-<?php $page_title = "Blog" ?>
-<?php include('inc/header.php') ?>
+<?php 
+$page_title = "Blog"; ?>
+<?php include('header.php'); ?>
 	
 	<section>
 		<div class="container">
@@ -313,4 +314,4 @@
 		</div>
 	</section>
 	
-<?php include('inc/footer.php') ?>
+<?php include('footer.php'); ?>

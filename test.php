@@ -1,4 +1,5 @@
 <?php  
-require_once 'core/init.php';
-print_r(json_decode('{"admin":1}', true));
+require_once __DIR__ . '/inc/init.php';
+$core = new Core;
+echo $core;
 ?>

@@ -1,5 +1,4 @@
 <?php 
-require_once 'core/init.php';  
 if(Input::exists()){
 	if(Token::check(Input::get('token'))){
 		$validate = new Validate();
@@ -42,14 +41,14 @@ if(Input::exists()){
 				$email_message .= "http://localhost/Projects/SocialStore/activate.php?email=". urlencode($email) . "&key=$activation";
 				mail($user->data()->email, 'Registration Confirmation', $email_message);
 				Session::put('home', 'Thank you for registering! A confirmation email has been sent to your email address. Please click on the activation link to activate your account.');
-				Redirect::to('login.php');
+				Redirect::to(BASE_URL . '?page=login');
 			} catch (Exception $e) {
 				die($e->getMessage());
 			}
 
 		} else {
 			Session::put('error_register', $validation->errors());
-			Redirect::to('login.php');
+			Redirect::to(BASE_URL . '?page=login');
 		}
 	}
 

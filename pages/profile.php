@@ -1,5 +1,4 @@
 <?php  
-require_once 'core/init.php';
 $user = User::getCurrentUser();
 $data = $user->data();
 ?>

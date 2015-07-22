@@ -64,7 +64,7 @@ $site_name = "Blue Lotus"
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="logo pull-left">
-							<a href="<?php echo BASE_URL; ?>index.php"><img src="<?php echo BASE_URL; ?>img/home/logo.png" alt="" /></a>
+							<a href="<?php echo BASE_URL; ?>"><img src="<?php echo BASE_URL; ?>img/home/logo.png" alt="" /></a>
 						</div>
 						<div class="btn-group pull-right">
 							<div class="btn-group">
@@ -94,13 +94,13 @@ $site_name = "Blue Lotus"
 						<div class="shop-menu pull-right">
 							<ul class="nav navbar-nav">
 								<li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
-								<li><a href="<?php echo BASE_URL; ?>checkout.php"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-								<li><a href="<?php echo BASE_URL; ?>cart.php" class="active"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+								<li><a href="<?php echo BASE_URL . '?page=checkout'; ?>"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+								<li><a href="<?php echo BASE_URL . '?page=cart'; ?>" class="active"><i class="fa fa-shopping-cart"></i> Cart</a></li>
 								<?php if (User::getCurrentUser() == false): ?>
-									<li><a class="login" href="<?php echo BASE_URL; ?>login.php"><i class="fa fa-sign-in"></i> Log In/Sign Up</a></li>
+									<li><a class="login" href="<?php echo BASE_URL . '?page=login'; ?>"><i class="fa fa-sign-in"></i> Log In/Sign Up</a></li>
 								<?php else: ?>
-									<li><a href="<?php echo BASE_URL; ?>profile.php"><i class="fa fa-user"></i><?php echo User::getCurrentUser()->data()->username; ?></a></li>
-									<li><a href="<?php echo BASE_URL; ?>logout.php"><i class="fa fa-sign-out"></i> Log Out</a></li>
+									<li><a href="<?php echo BASE_URL . '?page=profile'; ?>"><i class="fa fa-user"></i><?php echo User::getCurrentUser()->data()->username; ?></a></li>
+									<li><a href="<?php echo BASE_URL . '?page=logout'; ?>"><i class="fa fa-sign-out"></i> Log Out</a></li>
 								<?php endif; ?>		
 							</ul>
 						</div>
@@ -123,10 +123,10 @@ $site_name = "Blue Lotus"
 						</div>
 						<div class="mainmenu pull-left">
 							<ul class="nav navbar-nav collapse navbar-collapse">
-								<li><a href="<?php echo BASE_URL; ?>index.php" class="<?php echo $page_title === "Home"?"active":""; ?>">Home</a></li>
-								<li><a href="<?php echo BASE_URL; ?>products/" class="<?php echo $page_title === "Shop"?"active":""; ?>">Shop</a></li> 
-								<li><a href="<?php echo BASE_URL; ?>blog.php" class="<?php echo $page_title === "Blogs"?"active":""; ?>">Blog</a></li> 
-								<li><a href="<?php echo BASE_URL; ?>contact-us.php" class="<?php echo $page_title === "Contact"?"active":""; ?>">Contact</a></li>
+								<li><a href="<?php echo BASE_URL; ?>" class="<?php echo $page_title === "Home"?"active":""; ?>">Home</a></li>
+								<li><a href="<?php echo BASE_URL . '?page=shop'; ?>" class="<?php echo $page_title === "Shop"?"active":""; ?>">Shop</a></li> 
+								<li><a href="<?php echo BASE_URL . '?page=blog'; ?>" class="<?php echo $page_title === "Blogs"?"active":""; ?>">Blog</a></li> 
+								<li><a href="<?php echo BASE_URL . '?page=contact-us'; ?>" class="<?php echo $page_title === "Contact"?"active":""; ?>">Contact</a></li>
 							</ul>
 						</div>
 					</div>
