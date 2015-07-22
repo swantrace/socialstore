@@ -132,7 +132,6 @@ $site_name = "Blue Lotus"
 					</div>
 					<div class="col-sm-5">
 						<form class="pull-right search_form search_box" name="input" action="search.php" method="get">
-								<select id="category" name="category"><?php createCategoryList() ?></select>
 								<input type="text" id="keywords" name="keywords"  placeholder="Search" />
 							</div>
 						</form>

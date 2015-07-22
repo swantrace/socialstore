@@ -31,8 +31,15 @@ class Product{
     	return $sizes;
     }
 
+
+
     public static function getProductCategoriesById($id){
-    	$categories = array("category A", "category B", "category C");
+    	$categories = array();
+    	$sql = "SELECT category FROM categories INNER JOIN products_categories ON categories.id = products_categories.category_id WHERE products_categories.product_id = ?";
+    	$temp_categories = DB::getInstance()->query($sql, array($id))->fetchResults();
+    	foreach($temp_categories as $temp_category){
+    		$categories[] = $temp_category->category;
+    	}
     	return $categories;
     }
 

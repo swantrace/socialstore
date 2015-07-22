@@ -4,8 +4,6 @@ spl_autoload_register(function($class){
 	require_once ROOT_PATH . DS . CLASSES_DIR . DS . $class . '.php';
 });
 
-require_once ROOT_PATH.'/functions/sanitize.php';
-require_once ROOT_PATH.'/functions/categorize.php';
 
 if(Cookie::exists(Configure::get('remember/cookie_name')) && !Session::exists(Configure::get('session/session_name'))){
 	$hash = Cookie::get(Configure::get('remember/cookie_name'));

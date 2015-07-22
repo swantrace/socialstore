@@ -25,7 +25,7 @@ function get_list_view_html($product){
 	$output .= '<div class="product-overlay">';
 	$output .= '<div class="overlay-content">';
 	$output .= '<h2>$' . $product->price . '</h2>';
-	$output .= '<a href="' . BASE_URL . 'products/' . $product->sku . '/"><p>' . $product->price . '</p></a>';
+	$output .= '<a href="' . BASE_URL . '?page=product&sku=' . $product->sku . '"><p>' . $product->name . '</p></a>';
 	$output .='<form target="paypal" action="https://www.paypal.com/cgi-bin/webscr" method="post">';
 	$output .='<input type="hidden" name="cmd" value="_s-xclick">';
 	$output .='<input type="hidden" name="hosted_button_id" value="' . $product->paypal . '">';

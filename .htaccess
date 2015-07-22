@@ -1,4 +1,1 @@
-RewriteEngine On
-RewriteRule ^products/$ products/shop.php
-RewriteRule ^products/([0-9]+)/$ products/product-details.php?sku=$1
-RewriteRule ^(products/[0-9]+)$ $1/
+
