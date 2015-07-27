@@ -64,7 +64,7 @@
 								<?php if ($i == $current_page) : ?>
 									<li class="active"><span><?php echo $i; ?></span></li>
 								<?php else : ?>
-									<li><a href="./?pg=<?php echo $i; ?>"><?php echo $i; ?></a></li>
+									<li><a href="<?php echo BASE_URL . "?pg=$i&page=shop" ?>"><?php echo $i; ?></a></li>
 								<?php endif; ?>
 							<?php endwhile; ?>
 						</ul>

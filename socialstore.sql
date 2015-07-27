@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 2015-07-20 10:52:40
+-- Generation Time: 2015-07-23 07:08:02
 -- 服务器版本： 5.6.24
 -- PHP Version: 5.6.8
 
@@ -23,15 +23,68 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `categories`
+--
+
+DROP TABLE IF EXISTS `categories`;
+CREATE TABLE IF NOT EXISTS `categories` (
+  `id` int(10) NOT NULL,
+  `category` varchar(90) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
+
+--
+-- 插入之前先把表清空（truncate） `categories`
+--
+
+TRUNCATE TABLE `categories`;
+--
+-- 转存表中的数据 `categories`
+--
+
+INSERT INTO `categories` (`id`, `category`) VALUES
+(2, 'Antiques'),
+(3, 'Art'),
+(4, 'Antiques'),
+(5, 'Art'),
+(6, 'Automotive'),
+(7, 'Baby'),
+(8, 'Books'),
+(9, 'Business & Industrial'),
+(10, 'Cameras & Photo'),
+(11, 'Clothing & Accessories'),
+(12, 'Computers'),
+(13, 'Crafts'),
+(14, 'DVD''s & Movies'),
+(15, 'Electronics'),
+(16, 'Health & Beauty'),
+(17, 'Home & Garden'),
+(18, 'Jewelry & Watches'),
+(19, 'Pet Supplies'),
+(20, 'Services'),
+(21, 'Sports & Outdoors'),
+(22, 'Tools & Home Improvement'),
+(23, 'Toys & Hobbies'),
+(24, 'Video Games'),
+(25, 'Other');
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `groups`
 --
 
+DROP TABLE IF EXISTS `groups`;
 CREATE TABLE IF NOT EXISTS `groups` (
   `id` int(11) NOT NULL,
   `name` varchar(20) NOT NULL,
   `permissions` text NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
+--
+-- 插入之前先把表清空（truncate） `groups`
+--
+
+TRUNCATE TABLE `groups`;
 --
 -- 转存表中的数据 `groups`
 --
@@ -46,6 +99,7 @@ INSERT INTO `groups` (`id`, `name`, `permissions`) VALUES
 -- 表的结构 `products`
 --
 
+DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
   `id` int(11) NOT NULL,
   `sku` int(11) DEFAULT NULL,
@@ -57,6 +111,11 @@ CREATE TABLE IF NOT EXISTS `products` (
   `category_id` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- 插入之前先把表清空（truncate） `products`
+--
+
+TRUNCATE TABLE `products`;
 --
 -- 转存表中的数据 `products`
 --
@@ -98,15 +157,52 @@ INSERT INTO `products` (`id`, `sku`, `name`, `img`, `price`, `paypal`, `descript
 -- --------------------------------------------------------
 
 --
+-- 表的结构 `products_categories`
+--
+
+DROP TABLE IF EXISTS `products_categories`;
+CREATE TABLE IF NOT EXISTS `products_categories` (
+  `id` int(10) NOT NULL,
+  `product_id` int(10) NOT NULL,
+  `category_id` int(10) NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
+
+--
+-- 插入之前先把表清空（truncate） `products_categories`
+--
+
+TRUNCATE TABLE `products_categories`;
+--
+-- 转存表中的数据 `products_categories`
+--
+
+INSERT INTO `products_categories` (`id`, `product_id`, `category_id`) VALUES
+(1, 1, 11),
+(8, 2, 11),
+(9, 3, 11),
+(10, 4, 11),
+(11, 5, 11),
+(12, 6, 11),
+(13, 7, 11);
+
+-- --------------------------------------------------------
+
+--
 -- 表的结构 `products_sizes`
 --
 
+DROP TABLE IF EXISTS `products_sizes`;
 CREATE TABLE IF NOT EXISTS `products_sizes` (
   `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `size_id` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=129 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- 插入之前先把表清空（truncate） `products_sizes`
+--
+
+TRUNCATE TABLE `products_sizes`;
 --
 -- 转存表中的数据 `products_sizes`
 --
@@ -247,12 +343,18 @@ INSERT INTO `products_sizes` (`id`, `product_id`, `size_id`) VALUES
 -- 表的结构 `sizes`
 --
 
+DROP TABLE IF EXISTS `sizes`;
 CREATE TABLE IF NOT EXISTS `sizes` (
   `id` int(11) NOT NULL,
   `size` varchar(32) COLLATE utf8_unicode_ci DEFAULT NULL,
   `order` int(11) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- 插入之前先把表清空（truncate） `sizes`
+--
+
+TRUNCATE TABLE `sizes`;
 --
 -- 转存表中的数据 `sizes`
 --
@@ -269,6 +371,7 @@ INSERT INTO `sizes` (`id`, `size`, `order`) VALUES
 -- 表的结构 `tempusers`
 --
 
+DROP TABLE IF EXISTS `tempusers`;
 CREATE TABLE IF NOT EXISTS `tempusers` (
   `user_id` int(11) NOT NULL,
   `username` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
@@ -277,6 +380,11 @@ CREATE TABLE IF NOT EXISTS `tempusers` (
   `activation` varchar(40) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- 插入之前先把表清空（truncate） `tempusers`
+--
+
+TRUNCATE TABLE `tempusers`;
 --
 -- 转存表中的数据 `tempusers`
 --
@@ -291,6 +399,7 @@ INSERT INTO `tempusers` (`user_id`, `username`, `email`, `password`, `activation
 -- 表的结构 `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(11) NOT NULL,
   `username` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
@@ -298,18 +407,24 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `salt` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `joined` datetime NOT NULL,
-  `group_id` int(20) NOT NULL
+  `group_id` int(20) NOT NULL,
+  `is_vendor` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=MyISAM AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+--
+-- 插入之前先把表清空（truncate） `users`
+--
+
+TRUNCATE TABLE `users`;
 --
 -- 转存表中的数据 `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `salt`, `joined`, `group_id`) VALUES
-(1, 'sheldon', 'eitnan@fdjfke.com', 'e10adc3949ba59abbe56e057f20f883e', '', '0000-00-00 00:00:00', 0),
-(42, 'qhong', 'frederickhong.5@gmail.com', '0673ecaed4d6a5cc8e6adc51f4dcb523afeb1c52a1f864a4f31ecea5e41289fd', 'bbÓ¾Y†å×Cm\n_böúéó„›¢£vœíç', '2015-06-12 21:18:27', 1),
-(43, 'test2', 'frederickhong.5@gmail.com', '5dd02d766f1882f033a633e516b7ee63eddda05d865ef5101c0da343aed9e20a', '‚].[p!hs- F·µÙßÎ''…žfà¹åµ‡±F', '2015-06-12 21:29:17', 1),
-(44, 'testtest', 'frederickhong.5@gmail.com', '9b74d30e1fa5c1c66008e09ea64af056193bb15c0bd6e5f957c2030c58e1a66f', 'iÂflŠë¿®…?¨ùÈu°åÖ›ö?{ÐÓã(Vã', '2015-06-12 22:14:06', 1);
+INSERT INTO `users` (`id`, `username`, `email`, `password`, `salt`, `joined`, `group_id`, `is_vendor`) VALUES
+(1, 'sheldon', 'eitnan@fdjfke.com', 'e10adc3949ba59abbe56e057f20f883e', '', '0000-00-00 00:00:00', 0, 0),
+(42, 'qhong', 'frederickhong.5@gmail.com', '0673ecaed4d6a5cc8e6adc51f4dcb523afeb1c52a1f864a4f31ecea5e41289fd', 'bbÓ¾Y†å×Cm\n_böúéó„›¢£vœíç', '2015-06-12 21:18:27', 1, 0),
+(43, 'test2', 'frederickhong.5@gmail.com', '5dd02d766f1882f033a633e516b7ee63eddda05d865ef5101c0da343aed9e20a', '‚].[p!hs- F·µÙßÎ''…žfà¹åµ‡±F', '2015-06-12 21:29:17', 1, 0),
+(44, 'testtest', 'frederickhong.5@gmail.com', '9b74d30e1fa5c1c66008e09ea64af056193bb15c0bd6e5f957c2030c58e1a66f', 'iÂflŠë¿®…?¨ùÈu°åÖ›ö?{ÐÓã(Vã', '2015-06-12 22:14:06', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -317,12 +432,18 @@ INSERT INTO `users` (`id`, `username`, `email`, `password`, `salt`, `joined`, `g
 -- 表的结构 `users_session`
 --
 
+DROP TABLE IF EXISTS `users_session`;
 CREATE TABLE IF NOT EXISTS `users_session` (
   `id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
   `hash` varchar(50) NOT NULL
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
+--
+-- 插入之前先把表清空（truncate） `users_session`
+--
+
+TRUNCATE TABLE `users_session`;
 --
 -- 转存表中的数据 `users_session`
 --
@@ -335,6 +456,12 @@ INSERT INTO `users_session` (`id`, `user_id`, `hash`) VALUES
 --
 
 --
+-- Indexes for table `categories`
+--
+ALTER TABLE `categories`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `groups`
 --
 ALTER TABLE `groups`
@@ -344,6 +471,12 @@ ALTER TABLE `groups`
 -- Indexes for table `products`
 --
 ALTER TABLE `products`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `products_categories`
+--
+ALTER TABLE `products_categories`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -381,6 +514,11 @@ ALTER TABLE `users_session`
 --
 
 --
+-- AUTO_INCREMENT for table `categories`
+--
+ALTER TABLE `categories`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=26;
+--
 -- AUTO_INCREMENT for table `groups`
 --
 ALTER TABLE `groups`
@@ -390,6 +528,11 @@ ALTER TABLE `groups`
 --
 ALTER TABLE `products`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=33;
+--
+-- AUTO_INCREMENT for table `products_categories`
+--
+ALTER TABLE `products_categories`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `products_sizes`
 --
