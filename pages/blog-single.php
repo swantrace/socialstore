@@ -1,6 +1,6 @@
 <?php 
 $page_title = "Blog"; ?>
-<?php include('header.php'); ?>
+<?php include('templates/header.php'); ?>
 	
 	<section>
 		<div class="container">
@@ -179,4 +179,4 @@ $page_title = "Blog"; ?>
 		</div>
 	</section>
 	
-<?php include('footer.php'); ?>
+<?php include('templates/footer.php'); ?>

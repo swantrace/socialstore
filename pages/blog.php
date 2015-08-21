@@ -5,7 +5,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-3">
-					<?php include 'categories-list.php'; ?>
+					<?php include 'templates/categories-list.php'; ?>
 				</div>
 				<div class="col-sm-9">
 					<div class="blog-post-area">
@@ -90,4 +90,4 @@
 		</div>
 	</section>
 	
-<?php include('inc/footer.php') ?>
+<?php include('templates/footer.php') ?>

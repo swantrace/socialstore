@@ -3,7 +3,6 @@ $category = new Category(Url::getParameter('category_id'));
 $category_name = $category->getCategoryName();
 $products = $category->getCategoryProducts();
 ?>
-<?php require_once 'products.php';?>
 <?php
 // if (empty($_GET["pg"])) {
 //     $current_page = 1;
@@ -38,7 +37,7 @@ $products = $category->getCategoryProducts();
 
 ?>
 <?php $page_title = $category_name;?>
-<?php include 'header.php';?>
+<?php include 'templates/header.php';?>
 
 	<section id="advertisement">
 		<div class="container">
@@ -49,7 +48,7 @@ $products = $category->getCategoryProducts();
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-3">
-					<?php include 'categories-list.php';?>
+					<?php include 'templates/categories-list.php';?>
 				</div>
 
 				<div class="col-sm-9 padding-right">
@@ -59,7 +58,7 @@ $products = $category->getCategoryProducts();
 						</h2>
 <?php
 foreach ($products as $product) {
-    echo get_list_view_html($product);
+    echo Helper::get_list_view_html($product);
 }
 ?>
 						<div class="clear"></div>
@@ -72,4 +71,4 @@ foreach ($products as $product) {
 		</div>
 	</section>
 
-<?php include 'footer.php'?>
+<?php include 'templates/footer.php'?>

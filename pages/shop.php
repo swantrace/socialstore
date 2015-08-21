@@ -1,5 +1,4 @@
 <?php $products = Product::getAllProducts(); ?>
-<?php require_once('products.php'); ?>
 <?php
 	if (empty($_GET["pg"])) {
 		$current_page = 1;
@@ -34,7 +33,7 @@
 
 ?>
 <?php $page_title = "Shop";?>
-<?php include('header.php') ?>
+<?php include('templates/header.php') ?>
 	
 	<section id="advertisement">
 		<div class="container">
@@ -45,7 +44,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-3">
-					<?php include 'categories-list.php'; ?>
+					<?php include 'templates/categories-list.php'; ?>
 				</div>
 				
 				<div class="col-sm-9 padding-right">
@@ -53,7 +52,7 @@
 						<h2 class="title text-center">Features Items</h2>
 						<?php 
 							foreach($products as $product) {
-						    	echo get_list_view_html($product);
+						    	echo Helper::get_list_view_html($product);
 						    } 
 						?>
 						<div class="clear"></div>
@@ -74,4 +73,4 @@
 		</div>
 	</section>
 	
-<?php include('footer.php') ?>
+<?php include('templates/footer.php') ?>

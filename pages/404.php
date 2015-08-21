@@ -1,7 +1,7 @@
 <?php 
 $page_title = "404" 
 ?>
-<?php include('header.php') ?>
+<?php include('templates/header.php') ?>
 	<div class="container text-center">
 		<div class="logo-404">
 			<a href="index.html"><img src="img/home/logo.png" alt="" /></a>
@@ -13,4 +13,4 @@ $page_title = "404"
 			<h2><a href="<?php echo BASE_URL; ?>">Bring me back Home</a></h2>
 		</div>
 	</div>
-<?php include('footer.php') ?>
+<?php include('templates/footer.php') ?>

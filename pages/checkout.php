@@ -1,5 +1,5 @@
 <?php $page_title = "Checkout" ?>
-<?php include('header.php') ?>
+<?php include('templates/header.php') ?>
 
 	<section id="cart_items">
 		<div class="container">
@@ -240,4 +240,4 @@
 
 	
 
-<?php include('footer.php') ?>
+<?php include('templates/footer.php') ?>

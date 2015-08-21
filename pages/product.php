@@ -1,4 +1,3 @@
-<?php include("products.php"); ?>
 <?php
 
 if (isset($_GET["sku"])){
@@ -15,12 +14,12 @@ if (isset($_GET["sku"])){
 }
 ?>
 <?php $page_title = "Product"; ?>
-<?php include('header.php') ?>	
+<?php include('templates/header.php') ?>	
 	<section>
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-3">
-					<?php include 'categories-list.php'; ?>
+					<?php include 'templates/categories-list.php'; ?>
 				</div>				
 				<div class="col-sm-9 padding-right">
 					<div class="product-details"><!--product-details-->
@@ -387,4 +386,4 @@ if (isset($_GET["sku"])){
 		</div>
 	</section>
 	
-<?php include('footer.php') ?>
+<?php include('templates/footer.php') ?>

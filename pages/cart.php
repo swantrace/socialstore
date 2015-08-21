@@ -1,5 +1,5 @@
 <?php $page_title = "Cart" ?>
-<?php include('header.php') ?>
+<?php include('templates/header.php') ?>
 
 	<section id="cart_items">
 		<div class="container">
@@ -181,4 +181,4 @@
 		</div>
 	</section><!--/#do_action-->
 
-<?php include('footer.php') ?>
+<?php include('templates/footer.php') ?>

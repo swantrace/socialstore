@@ -1,10 +1,9 @@
 <?php 
 $displayed_products = 6;
 $page_title = "Home";
-include('products.php');
 $recent = Product::getRecentProducts();
 ?>
-<?php include('header.php'); ?>
+<?php include('templates/header.php'); ?>
 	
 	<section id="slider"><!--slider-->
 		<div class="container">
@@ -75,7 +74,7 @@ $recent = Product::getRecentProducts();
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-3">
-					<?php include 'categories-list.php'; ?>
+					<?php include 'templates/categories-list.php'; ?>
 				</div>
 				
 				<div class="col-sm-9 padding-right">
@@ -83,7 +82,7 @@ $recent = Product::getRecentProducts();
 						<h2 class="title text-center">Recent Items</h2>
 						<?php
 						    foreach(array_reverse($recent) as $product) {
-								echo get_list_view_html($product);
+								echo Helper::get_list_view_html($product);
 							}
 						?>
 						
@@ -479,4 +478,4 @@ $recent = Product::getRecentProducts();
 		</div>
 	</section>
 	
-<?php include('footer.php') ?>
+<?php include('templates/footer.php'); ?>

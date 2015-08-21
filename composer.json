@@ -1,0 +1,16 @@
+{
+    "require": {
+        "phpunit/phpunit": "^4.8"
+    },
+    "autoload": {
+    	"classmap": [
+    		"classes",
+    		"pages",
+    		"mod",
+    		"templates"
+    	],
+    	"files": [
+    		"inc/config.php"
+    	]
+    }
+}

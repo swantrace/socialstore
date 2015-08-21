@@ -67,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
 ?>
 <?php $page_title = "Contact"; ?>
-<?php include('header.php') ?>
+<?php include('templates/header.php') ?>
 	 
 	 <div id="contact-page" class="container">
     	<div class="bg">
@@ -162,4 +162,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     	</div>	
     </div><!--/#contact-page-->
 	
-<?php include('footer.php') ?>
+<?php include('templates/footer.php') ?>

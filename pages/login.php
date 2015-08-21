@@ -1,7 +1,7 @@
 <?php 
 $page_title = "Login & Register"; 
 ?>
-<?php include(ROOT_PATH . 'header.php'); ?>	
+<?php include('templates/header.php'); ?>	
 	<section id="form"><!--form-->
 		<div class="container">
 			<div class="row">
@@ -63,4 +63,4 @@ $page_title = "Login & Register";
 	</section><!--/form-->
 	
 	
-<?php include('footer.php') ?>
+<?php include('templates/footer.php') ?>
