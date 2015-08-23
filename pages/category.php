@@ -56,11 +56,15 @@ $products = $category->getCategoryProducts();
 						<h2 class="title text-center">
 							<?php echo $category_name;?>
 						</h2>
-<?php
-foreach ($products as $product) {
-    echo Helper::get_list_view_html($product);
-}
-?>
+						<?php
+						if (!empty($products)) {
+							foreach ($products as $product) {
+							    echo Helper::get_list_view_html($product);
+							}
+						} else {
+							echo 'There is no products in this category!';
+						}
+						?>
 						<div class="clear"></div>
 
 						<!-- pagination to be done -->

@@ -23,6 +23,9 @@ $GLOBALS['config'] = array(
 	'session' => array(
 			'session_name' => 'user',
 			'token_name' => 'token'
+		),
+	'pagination' => array(
+			'products_shop' => 5
 		)
 	);
 

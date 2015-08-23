@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Cart' => $baseDir . '/classes/Cart.php',
     'Category' => $baseDir . '/classes/Category.php',
     'Configure' => $baseDir . '/classes/Configure.php',
     'Cookie' => $baseDir . '/classes/Cookie.php',
@@ -482,6 +483,7 @@ return array(
     'PHP_Token_XOR_EQUAL' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD_FROM' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
+    'Paging' => $baseDir . '/classes/Paging.php',
     'Product' => $baseDir . '/classes/Product.php',
     'Redirect' => $baseDir . '/classes/Redirect.php',
     'SebastianBergmann\\Comparator\\ArrayComparator' => $vendorDir . '/sebastian/comparator/src/ArrayComparator.php',
