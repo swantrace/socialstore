@@ -4,7 +4,7 @@ if(!isset($_SESSION)) {
 }
 
 // new add
-defined("BASE_URL") || define("BASE_URL", "http://" . $_SERVER['SERVER_NAME'] . "/");
+if(isset($_SERVER['SERVER_NAME'])) defined("BASE_URL") || define("BASE_URL", "http://" . $_SERVER['SERVER_NAME'] . "/");
 defined("DS") || define("DS", DIRECTORY_SEPARATOR);
 defined("PAGES_DIR") || define("PAGES_DIR", "pages");
 // new add
